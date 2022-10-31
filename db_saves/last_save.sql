@@ -83,6 +83,7 @@ COPY public.groups (ruz_id, group_name, description) FROM stdin;
 --
 
 COPY public.users (tg_id, ruz_group_id, first_name, second_name) FROM stdin;
+12345	0	Petya	Ivanov
 \.
 
 
@@ -100,6 +101,14 @@ ALTER TABLE ONLY public.groups
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pk PRIMARY KEY (tg_id);
+
+
+--
+-- Name: users user_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT user_group_id_fkey FOREIGN KEY (ruz_group_id) REFERENCES public.groups(ruz_id);
 
 
 --
