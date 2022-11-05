@@ -43,72 +43,24 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: groups; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.groups (
-    ruz_id integer NOT NULL,
-    group_name character varying(15) NOT NULL,
-    description character varying(255) DEFAULT NULL::character varying
-);
-
-
-ALTER TABLE public.groups OWNER TO postgres;
-
---
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.users (
     tg_id integer NOT NULL,
-    ruz_group_id integer NOT NULL,
-    first_name character varying(20) DEFAULT NULL::character varying,
-    second_name character varying(20) DEFAULT NULL::character varying
+    group_id integer NOT NULL,
+    username character varying(25) NOT NULL
 );
 
 
 ALTER TABLE public.users OWNER TO postgres;
 
 --
--- Data for Name: groups; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.groups (ruz_id, group_name, description) FROM stdin;
-0	test group	test group desc
-\.
-
-
---
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (tg_id, ruz_group_id, first_name, second_name) FROM stdin;
-12345	0	Petya	Ivanov
+COPY public.users (tg_id, group_id, username) FROM stdin;
 \.
-
-
---
--- Name: groups table_name_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.groups
-    ADD CONSTRAINT table_name_pk PRIMARY KEY (ruz_id);
-
-
---
--- Name: users users_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_pk PRIMARY KEY (tg_id);
-
-
---
--- Name: users user_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT user_group_id_fkey FOREIGN KEY (ruz_group_id) REFERENCES public.groups(ruz_id);
 
 
 --

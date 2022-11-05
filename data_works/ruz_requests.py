@@ -4,7 +4,7 @@ import json
 groups_url = "https://ruz.hse.ru/api/search?term={}&type=group"
 schedule_url = "https://ruz.hse.ru/api/schedule/group/{}?start={}&finish={}&lng={}"
 
-
+# NEED TO MAKE ADDITION TO DATABASES
 def getting_group_id(group_name: str):
     response = requests.get(groups_url.format(group_name)).json()
 
